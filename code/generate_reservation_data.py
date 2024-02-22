@@ -4,6 +4,8 @@ import random
 import datetime
 import os
 
+from modules.write_to_csv import write_to_csv
+
 fake = Faker('ko_KR')
 
 def generate_fake_reservation():
@@ -26,12 +28,6 @@ def generate_fake_data(num_records):
     for _ in range(num_records):
         records.append(generate_fake_reservation())
     return records
-
-def write_to_csv(data, filename):
-    print('write_to_csv() ...')
-    with open(filename, 'w', newline='', encoding='utf-8') as csvfile:
-        writer = csv.writer(csvfile)
-        writer.writerows(data)
 
 if __name__ == "__main__":
     num_records = 1
