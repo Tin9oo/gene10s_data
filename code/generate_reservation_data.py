@@ -72,7 +72,7 @@ def generate_contact_number():
 # 쿠폰 아이디 생성하는 함수
 def generate_coupon_id():
     while True:
-        coupon_id = random.randint(1, 500)
+        coupon_id = random.randint(1, 3000000)
         if coupon_id not in existing_coupon_ids:
             existing_coupon_ids.add(coupon_id)
             return coupon_id
