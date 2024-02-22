@@ -44,6 +44,7 @@ if not os.path.exists(data_folder):
 # 기존에 생성된 번호를 저장할 집합
 existing_plate_numbers = set()
 existing_contact_numbers = set()
+existing_coupon_ids = set()
 
 # CSV 파일에 데이터 작성
 def write_csv(filename, data, header):
@@ -68,11 +69,21 @@ def generate_contact_number():
             existing_contact_numbers.add(contact_number)
             return contact_number
 
+# 쿠폰 아이디 생성하는 함수
+def generate_coupon_id():
+    while True:
+        coupon_id = random.randint(1, 500)
+        if coupon_id not in existing_coupon_ids:
+            existing_coupon_ids.add(coupon_id)
+            return coupon_id
+        
 # 랜덤 데이터를 생성하기 위한 함수
-def generate_random_reservation():
-    id_ = None
+def generate_random_reservation(i):
+    if (i % 100000) == 0:
+        print(f"{i}-th record is created")
+    id_ = i
     customer_id = random.randint(1, 100)
-    coupon_id = random.randint(1, 500)
+    coupon_id = generate_coupon_id()
     repair_shop_id = 1
     departure_time = datetime.now() - timedelta(days=random.randint(1, 365), hours=random.randint(0, 23), minutes=random.randint(0, 59))
     arrival_time = departure_time + timedelta(hours=random.randint(1, 24))
@@ -123,8 +134,8 @@ def generate_service_type():
     return service_type
 
 # 300만 건의 랜덤 데이터 생성
-num_records = 3000
-data = [generate_random_reservation() for _ in range(num_records)]
+num_records = 3000000
+data = [generate_random_reservation(i) for i in range(num_records)]
 
 # 헤더 정보
 header = ['id', 'customer_id', 'coupon_id', 'repair_shop_id', 'departure_time', 'arrival_time',

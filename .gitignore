@@ -1,1 +1,4 @@
 *.csv
+*.tar.gz
+*.pem
+.DS_Store
