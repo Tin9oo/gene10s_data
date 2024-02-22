@@ -6,7 +6,7 @@ from datetime import datetime, timedelta
 def generate_random_email():
     domains = ["gmail.com", "yahoo.com", "hotmail.com", "outlook.com", "icloud.com"]
     
-    # 랜덤 사용자 이름 생성 (알파벳 대문자, 소문자, 숫자로 구성된 10자리 문자열)
+    # 랜덤 사용자 이름 생성 (알파벳 소문자, 숫자로 구성된 10자리 문자열)
     username = ''.join(random.choices(string.ascii_lowercase + string.digits, k=10))
 
     # 랜덤 도메인 선택
@@ -17,8 +17,7 @@ def generate_random_email():
     return email
 
 def generate_random_phone_number():
-    # 핸드폰 번호 생성 (010으로 시작하는 숫자로 구성된 11자리 문자열)
-    phone_number = '010' + ''.join(random.choices(string.digits, k=8))
+    phone_number = '010-' + ''.join(random.choices(string.digits, k=4)) + '-' + ''.join(random.choices(string.digits, k=4))
     return phone_number
 
 def generate_random_birthdate():
@@ -54,7 +53,7 @@ data_count = 10
 if __name__ == "__main__":
     # CSV 파일 저장
     with open('./data/random_users.csv', 'w', newline='', encoding='utf-8') as csvfile:
-        fieldnames = ['name', 'email', 'phone_number', 'birthdate']
+        fieldnames = ['email', 'name', 'birthdate', 'phone_number', 'create_datetime', 'update_datetime']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         
         writer.writeheader()
@@ -65,6 +64,8 @@ if __name__ == "__main__":
             email = generate_random_email()
             phone_number = generate_random_phone_number()
             birthdate = generate_random_birthdate()
-            writer.writerow({'name': surname + name, 'email': email, 'phone_number': phone_number, 'birthdate': birthdate})
+            create_datetime = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            update_datetime = create_datetime
+            writer.writerow({'email': email, 'name': surname + name, 'birthdate': birthdate, 'phone_number': phone_number, 'create_datetime': create_datetime, 'update_datetime': update_datetime})
 
-    print(f"{data_count}개의 랜덤한 이름, 이메일, 핸드폰 번호가 random_users.csv 파일에 저장되었습니다.")
+    print(f"{data_count}개의 랜덤한 이메일, 이름, 생년월일, 핸드폰 번호가 random_users.csv 파일에 저장되었습니다.")
