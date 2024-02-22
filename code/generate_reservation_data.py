@@ -30,9 +30,9 @@ def generate_fake_data(num_records):
     return records
 
 if __name__ == "__main__":
-    num_records = 1
+    num_records = 10000
     current_directory = os.path.dirname(__file__)
-    filename = os.path.join(current_directory, '../data/fake_reservation_data.csv')
+    filename = os.path.join(current_directory, '../data/reservation.csv')
     data = generate_fake_data(num_records)
     write_to_csv(data, filename)
     print(f'{num_records}개의 데이터가 생성되어 {filename}에 저장되었습니다.')
