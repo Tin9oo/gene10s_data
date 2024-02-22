@@ -1,0 +1,1 @@
+SELECT * FROM GENE10S.step;
