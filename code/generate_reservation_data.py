@@ -2,11 +2,11 @@ import csv
 from faker import Faker
 import random
 import datetime
+import os
 
 fake = Faker('ko_KR')
 
 def generate_fake_reservation():
-    print('generate_fake_reservation() ...')
     reservation_id = fake.random_int(1, 1000000)
     car_id = fake.random_int(1, 100)
     customer_id = fake.random_int(1000, 9999)
@@ -21,19 +21,22 @@ def generate_fake_reservation():
     return [reservation_id, car_id, customer_id, 1, created_at, updated_at, phone_number, car_model, license_plate, issues, comment, status, created_at, updated_at]
 
 def generate_fake_data(num_records):
+    print('generate_fake_data() ...')
     records = []
     for _ in range(num_records):
         records.append(generate_fake_reservation())
     return records
 
 def write_to_csv(data, filename):
+    print('write_to_csv() ...')
     with open(filename, 'w', newline='', encoding='utf-8') as csvfile:
         writer = csv.writer(csvfile)
         writer.writerows(data)
 
 if __name__ == "__main__":
-    num_records = 3000000
-    filename = 'fake_reservation_data.csv'
+    num_records = 1
+    current_directory = os.path.dirname(__file__)
+    filename = os.path.join(current_directory, '../data/fake_reservation_data.csv')
     data = generate_fake_data(num_records)
     write_to_csv(data, filename)
     print(f'{num_records}개의 데이터가 생성되어 {filename}에 저장되었습니다.')
