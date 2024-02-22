@@ -18,7 +18,7 @@ def generate_fake_data(num_records):
     return data
 
 if __name__ == "__main__":
-    num_records = 500
+    num_records = 3000000
     current_directory = os.path.dirname(__file__)
     filename = os.path.join(current_directory, '..', 'data', 'coupon.csv')
     data = generate_fake_data(num_records)
