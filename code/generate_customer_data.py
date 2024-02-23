@@ -48,16 +48,17 @@ names = ["준호", "성우", "민준", "준영", "지훈", "도현", "재원", "
         "서하", "예림", "세영", "예지", "민규", "혜은", "민지", "혜선", "은정", "현우"]
 
 # 데이터 수
-data_count = 3000
+data_count = 100000
 
 if __name__ == "__main__":
     # CSV 파일 저장
     with open('./data/customer.csv', 'w', newline='', encoding='utf-8') as csvfile:
-        fieldnames = ['email', 'name', 'birthdate', 'phone_number', 'create_datetime', 'update_datetime']
+        fieldnames = ['id', 'email', 'name', 'birthdate', 'phone_number', 'create_datetime', 'update_datetime']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         
         writer.writeheader()
-        
+        id = 1
+
         for _ in range(data_count):
             surname = random.choice(surnames)
             name = random.choice(names)
@@ -66,6 +67,10 @@ if __name__ == "__main__":
             birthdate = generate_random_birthdate()
             create_datetime = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             update_datetime = create_datetime
-            writer.writerow({'email': email, 'name': surname + name, 'birthdate': birthdate, 'phone_number': phone_number, 'create_datetime': create_datetime, 'update_datetime': update_datetime})
+            writer.writerow({
+                'id' : id, 'email': email, 'name': surname + name, 'birthdate': birthdate, 
+                'phone_number': phone_number, 'create_datetime': create_datetime, 
+                'update_datetime': update_datetime})
+            id += 1
 
     print(f"{data_count}개의 랜덤한 이메일, 이름, 생년월일, 핸드폰 번호가 customer.csv 파일에 저장되었습니다.")
