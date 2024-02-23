@@ -24,7 +24,7 @@ def generate_datetime_range():
         current_time = start_time
         while current_time <= end_time:
             datetime_range.append(datetime.combine(current_date, current_time))
-            current_time = (datetime.combine(datetime.min, current_time) + timedelta(hours=1)).time()  # 1시간씩 증가
+            current_time = (datetime.combine(datetime.min, current_time) + timedelta(minutes=30)).time()  # 1시간씩 증가
         current_date += timedelta(days=1)  # 1일씩 증가
 
     return datetime_range
