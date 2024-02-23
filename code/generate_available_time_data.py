@@ -14,7 +14,7 @@ def generate_datetime_range():
     start_time = datetime.strptime('06:00:00', '%H:%M:%S').time()
 
     # 종료 날짜와 시간 설정
-    end_date = datetime.now().date() + timedelta(days=365 * 2)  # 오늘부터 2년 후까지의 범위
+    end_date = datetime.now().date() + timedelta(days=61)  # 오늘부터 2년 후까지의 범위
     end_time = datetime.strptime('22:00:00', '%H:%M:%S').time()
 
     # 모든 날짜와 시간 조합 생성
