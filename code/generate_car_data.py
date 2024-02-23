@@ -18,10 +18,11 @@ sell_name_options = ["Genesis G70", "Genesis G80", "Genesis G90", "Genesis GV70"
 if __name__ == "__main__":
     # CSV 파일 저장
     with open('./data/car.csv', 'w', newline='', encoding='utf-8') as csvfile:
-        fieldnames = ['customer_id', 'vin', 'sell_name', 'plate_number', 'create_datetime', 'update_datetime']
+        fieldnames = ['id', 'customer_id', 'vin', 'sell_name', 'plate_number', 'create_datetime', 'update_datetime']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         
         writer.writeheader()
+        id = 1
         
         for _ in range(data_count):
             vin = ''.join(random.choices(string.ascii_uppercase + string.digits, k=17))  # 랜덤한 VIN 생성
@@ -29,7 +30,8 @@ if __name__ == "__main__":
             plate_number = generate_random_plate_number()
             create_datetime = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             update_datetime = create_datetime
-            writer.writerow({'customer_id': random.randint(1, 100), 'vin': vin, 'sell_name': sell_name, 'plate_number': plate_number,
+            writer.writerow({'id' : id, 'customer_id': random.randint(1, 100), 'vin': vin, 'sell_name': sell_name, 'plate_number': plate_number,
             'create_datetime' : create_datetime, 'update_datetime' : update_datetime})
+            id += 1
 
     print(f"{data_count}개의 랜덤한 차량 데이터가 car.csv 파일에 저장되었습니다.")
