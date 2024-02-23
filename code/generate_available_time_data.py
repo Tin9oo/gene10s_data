@@ -43,12 +43,13 @@ if __name__ == "__main__":
         id = 1
 
         create_datetime = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        
         update_datetime = create_datetime
         
         for idx, datetime_value in enumerate(datetime_range):
             reservation_date = datetime_value.date()
             reservation_time = datetime_value.time()
-            reservation_count = random.randint(1, 10) 
+            reservation_count = random.randint(0, 5) 
             writer.writerow({'id': id, 'repair_shop_id': repair_shop_id, 'reservation_date': reservation_date, 'reservation_time': reservation_time, 'reservation_count': reservation_count,
             'create_datetime': create_datetime, 'update_datetime': update_datetime})
             id += 1

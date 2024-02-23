@@ -10,9 +10,12 @@ def generate_fake_data(num_records):
     data = []
     id = 1
     for _ in range(num_records):
+        if (id%100000) == 0:
+            print(f"{id}-th record created!!")
+
         serial_number = fake.uuid4().replace('-', '')[:30]  # UUID를 이용하여 랜덤한 시리얼 넘버 생성
         expired_date = fake.date_between(start_date='-2y', end_date='+10y')
-        is_used = 0
+        is_used = random.choice(['true', 'false'])
         create_datetime = datetime.now().strftime('%Y-%m-%d %H:%M:%S')  # 현재 시간을 생성 일시로 사용
         update_datetime = create_datetime  # 생성된 일시와 동일하게 설정
         data.append([id, serial_number, expired_date, is_used, create_datetime, update_datetime])
